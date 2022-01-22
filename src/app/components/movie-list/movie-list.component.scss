@@ -1,0 +1,53 @@
+p {
+  font-family: Lato;
+}
+.custom-button {
+  margin: 12px 0px 12px 12px !important;
+}
+.content {
+  padding: 16px;
+}
+.content > mat-card {
+  width: 200px;
+}
+.example-card {
+  min-width: 90%;
+  margin: 21px;
+  color: saddlebrown;
+  background-color: antiquewhite;
+}
+.cards {
+  width: 400px;
+}
+mat-card img {
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 50%;
+  margin-right: inherit;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 0;
+  height: 0;
+  overflow: hidden;
+}
+.button {
+  padding: 20px 40px;
+  border-color: white;
+  font-size: 17px;
+  font-size: 1.7rem;
+  font-family: tahom;
+  font-weight: bold;
+  margin-top: 40px;
+  display: inline-block;
+}
+
+.next {
+  position: sticky;
+  left: 83%;
+  top: 14%;
+  width: 30%;
+  color: gray;
+  background-color: lightskyblue;
+}

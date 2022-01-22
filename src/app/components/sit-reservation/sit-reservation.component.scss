@@ -1,0 +1,170 @@
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+.screen {
+  padding: 6px;
+  margin-top: 30px;
+  margin-bottom: 28px;
+}
+
+.table > .fixed-column {
+  position: absolute;
+  display: inline-block;
+  width: auto;
+  border-right: 1px solid #ddd;
+}
+
+.td th {
+  width: 31px;
+}
+
+.tdBox {
+  display: inline-block;
+  width: 26px;
+  height: 23px;
+  padding: 1px 3px;
+  border: 4px double white;
+  background-color: #ddd;
+  opacity: 0.4;
+}
+
+.spanBox {
+  display: inline-block;
+  width: 28px;
+  height: 23px;
+  padding: 1px 3px;
+  border: 4px double white;
+  background-color: #ddd;
+  margin-top: 2%;
+}
+
+.seatsBtn {
+  margin-top: 1%;
+
+  &.selected {
+    background-color: rgb(255, 0, 0, 1);
+  }
+}
+
+.input {
+  width: 14%;
+  position: relative;
+  display: inline-block;
+  margin-right: 2%;
+}
+
+.greenColor {
+  background-color: #5cb85c;
+}
+
+.redColor {
+  background-color: #d9534f;
+}
+
+.resultTable td:nth-child(3) {
+  max-width: 100%;
+  word-break: break-all;
+}
+p {
+  font-family: Lato;
+}
+.custom-button {
+  margin: 12px 0px 12px 12px !important;
+}
+.content {
+  padding: 16px;
+}
+.content > mat-card {
+  width: 20px;
+}
+.example-card {
+  min-width: 100%;
+  margin: 40px;
+}
+.cards {
+  width: 400px;
+}
+mat-card img {
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  width: 10%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 10%;
+  margin-right: inherit;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 0;
+  height: 0;
+  overflow: hidden;
+}
+.button {
+  padding: 20px 40px;
+  border-color: white;
+  font-size: 17px;
+  font-size: 1.7rem;
+  font-family: tahom;
+  font-weight: bold;
+  margin-top: 40px;
+  display: inline-block;
+}
+.container {
+  background-image: url(/assets/Poster/pickey.mp4);
+}
+.mat-card-title-group {
+  display: flex;
+  justify-content: space-around;
+  align-content: stretch;
+}
+.spanBoxGreen {
+  background-color: green;
+}
+.spanBoxRed {
+  background-color: red;
+}
+.spanBoxEmpty {
+  background-color: #ddd;
+}
+$grid-columns: 12 !default;
+$grid-gutter-width: 1.5rem !default;
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px);
+}
+.box1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+.seat {
+  background-color: darkgrey;
+}
+
+.occupied {
+  fill: red;
+}
+
+.free {
+  fill: #afafaf;
+}
+
+.my-flex-container {
+  border: 2px solid green;
+  height: 100px;
+  margin-bottom: 20px;
+}
+.my-flex-container-column {
+  border: 2px solid green;
+  height: 200;
+  margin-bottom: 20px;
+}
+
+.no-seat {
+  opacity: 0;
+  cursor: none;
+  pointer-events: none;
+}
