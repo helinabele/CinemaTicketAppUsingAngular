@@ -15,6 +15,16 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+mat-card.seat-detail {
+  mat-list-item {
+    .mat-list-item-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";

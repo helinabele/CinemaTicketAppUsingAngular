@@ -12,6 +12,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ProfilesComponent } from './layout/profiles/profiles.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
 import { DatePipe } from '@angular/common';
 import { MovieListService } from './components/movie-list/movie-list.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,6 +65,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatVideoModule,
     NgbModule,
     FontAwesomeModule,
+    MatListModule,
   ],
   exports: [MatInputModule],
   providers: [

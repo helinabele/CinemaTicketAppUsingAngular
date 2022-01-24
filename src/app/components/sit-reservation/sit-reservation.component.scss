@@ -40,11 +40,16 @@
   margin-top: 2%;
 }
 
+.direction {
+  text-align: center;
+}
+
 .seatsBtn {
   margin-top: 1%;
 
   &.selected {
     background-color: rgb(255, 0, 0, 1);
+    color: #fff;
   }
 }
 
@@ -72,6 +77,7 @@ p {
 }
 .custom-button {
   margin: 12px 0px 12px 12px !important;
+  text-align: center;
 }
 .content {
   padding: 16px;
@@ -88,8 +94,8 @@ p {
 }
 mat-card img {
   object-fit: cover; /*this makes the image in src fit to the size specified below*/
-  width: 10%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
-  height: 10%;
+  width: 200; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 200%;
   margin-right: inherit;
 }
 .video-container {
@@ -116,6 +122,9 @@ mat-card img {
   display: flex;
   justify-content: space-around;
   align-content: stretch;
+}
+.subtitle-detail {
+  margin-top: 20px !important;
 }
 .spanBoxGreen {
   background-color: green;
@@ -167,4 +176,9 @@ $grid-gutter-width: 1.5rem !default;
   opacity: 0;
   cursor: none;
   pointer-events: none;
+}
+
+.mat-card-image {
+  height: 200px;
+  width: 200px;
 }

@@ -43,6 +43,9 @@ export class SitReservationComponent implements OnInit {
   //isEmpty: ['0.4', '1.4', '2.4', '3.4'];
   isEmpty: boolean = false;
   bookings = [];
+  selectedSeats: ColumnModel[] = [];
+  moviePrice = 160;
+  seatC: any = {};
 
   constructor(
     private _sitReservationService: SitReservationService,
@@ -77,12 +80,6 @@ export class SitReservationComponent implements OnInit {
       const index = seat.indexOf('.');
       tempRows.push(parseInt(seat.substring(0, index)));
     });
-    // for (const row in tempRows) {
-    //   let removeable = this.lay.Rows[tempRows[row] - 1];
-    //   removeable.columns = removeable.columns.filter(
-    //     (el) => !temp.seats.includes(el.seatId)
-    //   );
-    // }
     for (const row in tempRows) {
       let removeable = this.lay.Rows[tempRows[row] - 1];
       removeable.columns.forEach((col) => {
@@ -93,37 +90,17 @@ export class SitReservationComponent implements OnInit {
     }
   }
 
-  toggleColor(col: ColumnModel) {
-    this.toggleStyle = !this.toggleStyle;
-    this.status = this.toggleStyle ? 'Enable' : 'Disable';
-    console.log('does it work?', col.seatId);
+  selectSeat(col: ColumnModel) {
+    const index = this.selectedSeats.findIndex(
+      (seat) => seat.seatId == col.seatId
+    );
     col.isSelected = !col.isSelected;
+    if (col.isSelected) {
+      this.selectedSeats.push(col);
+    } else {
+      index && this.selectedSeats.splice(index, 1);
+    }
   }
-
-  // onClick($event: any) {
-  //   const seat = $event.target.closest('.st121');
-  //   if (!seat) {
-  //     return;
-  //   }
-  //   const res = seat.getAttribute('class').split(' ').indexOf('occupied');
-  //   if (res > -1) {
-  //     seat.removeAttribute('style');
-  //     seat.setAttribute('class', 'free st121');
-  //     this.counter -= 1;
-  //   } else if (this.counter < MAX_SEATS) {
-  //     seat.removeAttribute('style');
-  //     seat.setAttribute('class', 'occupied st121');
-  //     this.counter += 1;
-  //   }
-  // }
-
-  // rowNo(i: number) {
-  //   return new Array(i);
-  // }
-  // rowNo(): Array<string> {
-  //   const keys = Object.keys(EventType);
-  //   return keys.slice(keys.length / 2);
-  // }
 
   // viewSits() {
   //   this._sitReservationService.updateSit().subscribe((result) => {
@@ -141,8 +118,11 @@ export class SitReservationComponent implements OnInit {
     window.history.back();
   }
 
-  save() {}
-  next() {}
+  confirmSeat() {
+    console.log(this.selectedSeats);
+    this.seatC = Object.assign(this.seatC, this.selectedSeats);
+    this._sitReservationService.addSeat(this.seatC);
+  }
 
   private onSaveSuccess(result: IMovie) {
     this.isSaving = false;
