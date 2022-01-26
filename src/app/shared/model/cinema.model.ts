@@ -8,6 +8,8 @@ export interface ICinema {
   Capacity?: number;
   LayoutID?: number;
   layouts?: ILayout[];
+  Row?: number;
+  Column?: number;
 }
 
 export class Cinema implements ICinema {
@@ -16,6 +18,8 @@ export class Cinema implements ICinema {
     public CinemaName?: String,
     public Capacity?: number,
     public LayoutId?: number,
-    public layouts?: ILayout[]
+    public layouts?: ILayout[],
+    public Row?: number,
+    public Column?: number
   ) {}
 }

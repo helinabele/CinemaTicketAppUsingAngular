@@ -1,12 +1,8 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IMovie, Movie } from 'src/app/shared/model/movie.model';
 import { SitReservationService } from './sit-reservation.service';
 import { MovieListService } from '../movie-list/movie-list.service';
-import { data, param } from 'jquery';
-import { ISchedule } from 'src/app/shared/model/schedule.model';
 import {
   ColumnModel,
   ILayout,
@@ -14,8 +10,6 @@ import {
   RowModel,
 } from 'src/app/shared/model/layout.model';
 import { ICinema } from 'src/app/shared/model/cinema.model';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
-const MAX_SEATS = 9;
 
 @Component({
   selector: 'app-sit-reservation',
@@ -29,23 +23,16 @@ export class SitReservationComponent implements OnInit {
   isSaving: boolean;
   Movie_ID: string | null;
   id: any;
-  isReserved: boolean;
   lay: ILayout = new Layout();
   cinemas: ICinema[];
   counter = 0;
   toggleStyle = false;
-  status = 'Enable';
-  // coll: ColumnModel = {
-  //   seatId: '1',
-  //  // seatName: 'r',
-  //   //seatType: 't',
-  // };
-  //isEmpty: ['0.4', '1.4', '2.4', '3.4'];
   isEmpty: boolean = false;
   bookings = [];
   selectedSeats: ColumnModel[] = [];
   moviePrice = 160;
-  seatC: any = {};
+  seatData: any = {};
+  clicked = false;
 
   constructor(
     private _sitReservationService: SitReservationService,
@@ -53,11 +40,12 @@ export class SitReservationComponent implements OnInit {
     private _router: Router,
     private _movieListService: MovieListService
   ) {}
-  ngOnInit() {
-    // this.viewSits();
+
+  ngOnInit(): void {
     this.id = this._route.snapshot.paramMap.get('Movie_ID');
-    this.getOne();
+    this.getMovie();
     this.structureForm();
+    this.loadSeats();
   }
 
   structureForm() {
@@ -74,12 +62,16 @@ export class SitReservationComponent implements OnInit {
       }
       this.lay.Rows.push(newRow);
     }
+
     const temp = { seats: ['1.4', '6.3', '7.3', '8.3', '9.3', '10.3', '2.6'] };
+    const temp2 = { seats2: ['3.1', '10.4', '5.4', '6.4', '3.3'] };
+
     let tempRows: any[] = [];
     temp.seats.forEach((seat) => {
       const index = seat.indexOf('.');
       tempRows.push(parseInt(seat.substring(0, index)));
     });
+
     for (const row in tempRows) {
       let removeable = this.lay.Rows[tempRows[row] - 1];
       removeable.columns.forEach((col) => {
@@ -88,9 +80,20 @@ export class SitReservationComponent implements OnInit {
         }
       });
     }
+    for (const row in tempRows) {
+      let d = this.lay.Rows[tempRows[row] - 1];
+      d.columns.forEach((col) => {
+        if (temp2.seats2.includes(col.seatId)) {
+          col.isReserved = true;
+        }
+      });
+    }
   }
 
   selectSeat(col: ColumnModel) {
+    console.log(col.isSelected);
+    console.log(col.isReserved);
+    console.log(col.isUnavailable);
     const index = this.selectedSeats.findIndex(
       (seat) => seat.seatId == col.seatId
     );
@@ -102,13 +105,13 @@ export class SitReservationComponent implements OnInit {
     }
   }
 
-  // viewSits() {
-  //   this._sitReservationService.updateSit().subscribe((result) => {
-  //     this.layouts = result;
-  //   });
-  // }
+  loadSeats() {
+    this._sitReservationService.getSeats().subscribe((result) => {
+      this.layouts = result;
+    });
+  }
 
-  getOne() {
+  getMovie() {
     this._movieListService.getMovie(this.id).subscribe((data) => {
       this.movie = data;
     });
@@ -119,9 +122,11 @@ export class SitReservationComponent implements OnInit {
   }
 
   confirmSeat() {
-    console.log(this.selectedSeats);
-    this.seatC = Object.assign(this.seatC, this.selectedSeats);
-    this._sitReservationService.addSeat(this.seatC);
+    this.seatData = Object.assign(this.seatData, [
+      this.selectedSeats,
+      this.movie,
+    ]);
+    this._sitReservationService.addSeat(this.seatData);
   }
 
   private onSaveSuccess(result: IMovie) {

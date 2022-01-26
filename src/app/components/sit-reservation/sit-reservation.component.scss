@@ -3,31 +3,9 @@
   margin-bottom: 8px;
   margin-top: 8px;
 }
-.screen {
-  padding: 6px;
-  margin-top: 30px;
-  margin-bottom: 28px;
-}
-
-.table > .fixed-column {
-  position: absolute;
-  display: inline-block;
-  width: auto;
-  border-right: 1px solid #ddd;
-}
 
 .td th {
   width: 31px;
-}
-
-.tdBox {
-  display: inline-block;
-  width: 26px;
-  height: 23px;
-  padding: 1px 3px;
-  border: 4px double white;
-  background-color: #ddd;
-  opacity: 0.4;
 }
 
 .spanBox {
@@ -46,6 +24,12 @@
 
 .seatsBtn {
   margin-top: 1%;
+  display: flex;
+  text-align: center;
+
+  .seat {
+    cursor: pointer;
+  }
 
   &.selected {
     background-color: rgb(255, 0, 0, 1);
@@ -137,28 +121,17 @@ mat-card img {
 }
 $grid-columns: 12 !default;
 $grid-gutter-width: 1.5rem !default;
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 100px);
-}
-.box1 {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 4;
-}
 
 .seat {
   background-color: darkgrey;
 }
 
-.occupied {
-  fill: red;
-}
-
-.free {
-  fill: #afafaf;
+.theatre {
+  display: flex;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .my-flex-container {

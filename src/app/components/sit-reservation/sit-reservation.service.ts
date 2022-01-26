@@ -3,19 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ILayout } from 'src/app/shared/model/layout.model';
 import { IMovie } from 'src/app/shared/model/movie.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SitReservationService {
-  apiURL = 'http://localhost:61717/api/CinimaTicket';
+  private apiURL = environment.apiURL + '/CinimaTicket';
   public movies: IMovie[];
 
   constructor(private http: HttpClient) {}
-
-  updateSit() {
-    return this.http.get<ILayout[]>(`${this.apiURL}/GetEmptyAndReserved`);
-  }
 
   getMovies(id: number): Observable<IMovie[]> {
     return this.http.get<IMovie[]>(`${this.apiURL}/GetAllMovie/id`);
@@ -25,14 +22,22 @@ export class SitReservationService {
     return this.http.get<IMovie[]>(`${this.apiURL}/GetAllMovie/id`);
   }
 
-  addSeat(seatC: any) {
+  addSeat(seatData: any) {
     let seats = [];
     if (localStorage.getItem('Seats')) {
       seats = JSON.parse(localStorage.getItem('Seats')!);
-      seats = [seatC, ...seats];
+      seats = [seatData, ...seats];
     } else {
-      seats = [seatC];
+      seats = [seatData];
     }
     localStorage.setItem('Seats', JSON.stringify(seats));
+  }
+
+  getReservedSit() {
+    return this.http.get<IMovie[]>(`${this.apiURL}`);
+  }
+
+  getSeats(): Observable<ILayout[]> {
+    return this.http.get<ILayout[]>(`${this.apiURL}`);
   }
 }
