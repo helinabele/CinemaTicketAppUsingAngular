@@ -41,6 +41,8 @@ export class SitReservationComponent implements OnInit {
     private _movieListService: MovieListService
   ) {}
 
+  ngOnChanges() {}
+
   ngOnInit(): void {
     this.id = this._route.snapshot.paramMap.get('Movie_ID');
     this.getMovie();
@@ -63,8 +65,10 @@ export class SitReservationComponent implements OnInit {
       this.lay.Rows.push(newRow);
     }
 
-    const temp = { seats: ['1.4', '6.3', '7.3', '8.3', '9.3', '10.3', '2.6'] };
-    const temp2 = { seats2: ['3.1', '10.4', '5.4', '6.4', '3.3'] };
+    const temp = {
+      seats: ['1.4', '6.3', '7.3', '8.3', '9.3', '10.3', '2.6'],
+      seats2: ['10.4', '5.4', '6.4', '1.1', '2.3', '3.3', '3.1'],
+    };
 
     let tempRows: any[] = [];
     temp.seats.forEach((seat) => {
@@ -80,20 +84,24 @@ export class SitReservationComponent implements OnInit {
         }
       });
     }
-    for (const row in tempRows) {
-      let d = this.lay.Rows[tempRows[row] - 1];
+
+    let temps2: any[] = [];
+    temp.seats2.forEach((seat) => {
+      const index = seat.indexOf('.');
+      temps2.push(parseInt(seat.substring(0, index)));
+    });
+    for (const row in temps2) {
+      let d = this.lay.Rows[temps2[row] - 1];
       d.columns.forEach((col) => {
-        if (temp2.seats2.includes(col.seatId)) {
+        if (temp.seats2.includes(col.seatId)) {
           col.isReserved = true;
         }
+        console.log('isReserved :', col.isReserved, col.seatId);
       });
     }
   }
 
   selectSeat(col: ColumnModel) {
-    console.log(col.isSelected);
-    console.log(col.isReserved);
-    console.log(col.isUnavailable);
     const index = this.selectedSeats.findIndex(
       (seat) => seat.seatId == col.seatId
     );
@@ -103,6 +111,7 @@ export class SitReservationComponent implements OnInit {
     } else {
       index && this.selectedSeats.splice(index, 1);
     }
+    console.log(col.isSelected, col.seatId);
   }
 
   loadSeats() {

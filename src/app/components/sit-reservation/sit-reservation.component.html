@@ -19,15 +19,15 @@
                             <mat-card>
                                 <h1>MOVIE SEAT RESERVATION</h1>
                             </mat-card>
-                        </div>
-                        <div class="d-flex flex-row cinema-seats" *ngFor="let row of lay.Rows; let i = index">
-                            <div class="col p-2 flex-column" *ngFor="let col of row.columns; let j = index">
-                                <div class="card" [ngClass]="{'no-seat': col.isUnavailable}">
-                                    <button id="rowCol" class="btn btn-sm seatsBtn seat direction"
-                                        [ngClass]="{'selected': col.isSelected}" type="button" (click)="selectSeat(col)"
-                                        [disabled]="col.isReserved">
-                                        {{col.seatId}}
-                                    </button>
+                            <div class="d-flex flex-row cinema-seats" *ngFor="let row of lay.Rows; let i = index">
+                                <div class="col p-2 flex-column" *ngFor="let col of row.columns; let j = index">
+                                    <div class="card" [ngClass]="{'no-seat': col.isUnavailable}">
+                                        <button id="rowCol" class="btn btn-sm seatsBtn seat direction"
+                                            [ngClass]="{'selected': col.isSelected}" type="button"
+                                            (click)="selectSeat(col)" [disabled]="col.isReserved">
+                                            {{col.seatId}}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,6 @@
                                 routerLink="/sit-reservation-detail">
                                 <span class="fa fa-save"></span>&nbsp;
                                 <span>Confirm Seats</span>
-
                             </button>&nbsp;
                             <button type="submit" class="btn btn-info" (click)="previousState()">
                                 <span class="fa fa-arrow-left"></span>&nbsp;

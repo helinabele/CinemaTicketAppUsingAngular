@@ -3,6 +3,7 @@ p {
 }
 .custom-button {
   margin: 12px 0px 12px 12px !important;
+  text-align: center;
 }
 .content {
   padding: 16px;
@@ -10,20 +11,26 @@ p {
 .content > mat-card {
   width: 200px;
 }
-.example-card {
-  min-width: 90%;
-  margin: 21px;
-  color: saddlebrown;
-  background-color: antiquewhite;
-}
+// .example-card {
+//   min-width: 90%;
+//   margin: 21px;
+//   color: saddlebrown;
+//   background-color: antiquewhite;
+// }
 .cards {
-  width: 400px;
+  width: 282px;
+  border-color: deepskyblue;
+  background-color: aliceblue;
+  margin-top: 17px;
 }
-mat-card img {
-  object-fit: cover; /*this makes the image in src fit to the size specified below*/
-  width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
-  height: 50%;
-  margin-right: inherit;
+// mat-card img {
+//   object-fit: cover; /*this makes the image in src fit to the size specified below*/
+//   width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+//   height: 50%;
+//   margin-right: inherit;
+// }
+.container {
+  background-color: whitesmoke;
 }
 .video-container {
   position: relative;
@@ -31,6 +38,17 @@ mat-card img {
   padding-top: 0;
   height: 0;
   overflow: hidden;
+}
+.card-img-top {
+  height: 200px;
+  width: 100;
+  object-fit: cover;
+  margin-top: 15px;
+}
+.card {
+  margin-bottom: 15px;
+  min-height: 500px;
+  max-height: 500px;
 }
 .button {
   padding: 20px 40px;
@@ -42,12 +60,29 @@ mat-card img {
   margin-top: 40px;
   display: inline-block;
 }
-
+.block {
+  justify-content: end;
+}
+.mx-auto {
+  padding: 6px;
+}
 .next {
-  position: sticky;
+  position: inherit;
   left: 83%;
   top: 14%;
   width: 30%;
   color: gray;
   background-color: lightskyblue;
+}
+.mat-card-header {
+  text-align: center;
+  padding: 12px;
+}
+
+mat-toolbar {
+  justify-content: space-between;
+}
+.column-label {
+  margin-right: 8px;
+  font-size: 1rem;
 }

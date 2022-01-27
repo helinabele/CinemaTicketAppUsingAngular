@@ -1,41 +1,47 @@
-<div class="container" style="background-color: whitesmoke;">
-    <div class="row">
-        <div class="col-sm-4 mx-auto" *ngFor="let movie of movies">
-            <mat-card class="example-card" id="details">
-                <mat-card-title-group>
-                    <mat-card-title>Title :{{movie.Movie_Title}}</mat-card-title>
-                    <img mat-card-image src="{{movie.Movie_Poster}}">
-                    <mat-card-subtitle>{{"Actors : " + movie.Movie_Actor}}</mat-card-subtitle>
-                    <mat-card-subtitle>{{"Director :" + movie.Movie_Director}}</mat-card-subtitle>
-                    <mat-card-subtitle>{{movie.Movie_Director}}</mat-card-subtitle>
-                    <div *ngFor="let cinema of cinemas" readonly="true">{{cinema.CinemaName}}</div>
+<div fxHide.lt-md>
+    <span class="column-label">Columns</span>
+    <mat-slider [max]="6" [min]="3" [(ngModel)]="gridColumns" [thumbLabel]="true">
+    </mat-slider>
+</div>
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of movies">
+            <mat-card class="mat-elevation-z4">
+                <mat-card-header>
+                    <mat-card-title style="vertical-align: -webkit-baseline-middle;">{{"Title : "+ movie.Movie_Title}}
+                    </mat-card-title>
+                </mat-card-header>
+                <img mat-card-image class="card-img-top" src="{{movie.Movie_Poster}}">
 
+                <mat-card-title-group>
+                    <!-- <div *ngFor="let cinema of cinemas" readonly="true">{{cinema.CinemaName}}</div> -->
+                    <div>{{"Actors : " + movie.Movie_Actor}}</div>
+                    <div>{{"Director :" + movie.Movie_Director}}</div>
                 </mat-card-title-group>
-                <mat-card-content>{{movie.Movie_Discription}}</mat-card-content>
-                <a class="btn btn-outline-dark" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
-                    aria-controls="collapseExample">Watch thrailer<i class="fa fa-play-circle" aria-hidden="true">
-                        &nbsp;</i></a>
-                <div #collapse="ngbCollapse" [ngbCollapse]="!isCollapsed" class="block">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- <mat-video #videoPlayer (click)="toggleVideo($event)" [title]="title" [autoplay]="autoplay"
-                                [preload]="preload" [loop]="loop" [fullscreen]="fullscreen" [download]="download"
-                                [quality]="quality" [keyboard]="keyboard" [spinner]="spinner" [(muted)]="muted"
-                                [playsinline]="playsinline" [showFrameByFrame]="showFrameByFrame" [(time)]="currentTime"
-                                src="{{movie.Movie_Trailer}}" poster='{{movie.Movie_Poster}}'>
-                            </mat-video> -->
-                            <video [src]="movie.Movie_Trailer" style="
-                            height: 175px;" controls="true"></video>
-                            <!-- <mat-video #videoPlayer src="{{movie.Movie_Trailer}}" [autoplay]="false" [preload]="false">
-                            </mat-video> -->
-                            <!-- <iframe src="{{movie.Movie_Trailer}}" frameborder="0" width="560" height="315"></iframe> -->
-                        </div>
-                    </div>
-                </div>
+
+                <mat-card-content>
+                    <p>{{movie.Movie_Discription}}</p>
+                </mat-card-content>
+
+                <!-- //justify-content: end; -->
+
                 <mat-card-actions>
-                    <button mat-raised-button class="next" [routerLink]=" ['/sit-reservation/', movie.Movie_ID]">Next
-                        <i class="fa fa-long-arrow-right">
-                            &nbsp;</i></button>
+                    <div class="custom-button">
+                        <a mat-raised-button class="btn btn-sm btn-outline-dark" (click)="collapse.toggle()"
+                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Watch thrailer<i
+                                class="fa fa-play-circle" aria-hidden="true">
+                                &nbsp;</i></a>
+
+                        <a mat-raised-button class="btn btn-sm btn-outline-dark"
+                            [routerLink]=" ['/sit-reservation/', movie.Movie_ID]">Reserve
+                            <i class="fa fa-long-arrow-right">
+                                &nbsp;</i>
+                        </a>
+                    </div>
+                    <div #collapse="ngbCollapse" [ngbCollapse]="!isCollapsed">
+                        <video [src]="movie.Movie_Trailer" style="height: 139px;
+                            width: -webkit-fill-available;" controls="true"></video>
+                    </div>
                 </mat-card-actions>
             </mat-card>
         </div>

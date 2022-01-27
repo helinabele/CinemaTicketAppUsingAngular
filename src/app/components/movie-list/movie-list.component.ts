@@ -7,7 +7,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { event } from 'jquery';
 import * as moment from 'moment';
@@ -21,6 +21,7 @@ import { IMovie, Movie } from 'src/app/shared/model/movie.model';
   styleUrls: ['./movie-list.component.scss'],
 })
 export class MovieListComponent implements OnInit {
+  form: FormGroup;
   date: any;
   movies: IMovie[] = [];
   public isCollapsed = false;
@@ -42,16 +43,18 @@ export class MovieListComponent implements OnInit {
   spinner = 'spin';
   muted = false;
   cinemas: ICinema[];
+  // gridColumns: any = new FormControl();
+  gridColumns: number = 3;
 
   @ViewChild('videoPlayer') videoPlayer: ElementRef;
-  // videoplayer = <HTMLMediaElement> document.getElementById('videoPlayer');
 
   videoClicked = false;
   constructor(
     private _movieListService: MovieListService,
     public datepipe: DatePipe,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    builder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -98,5 +101,9 @@ export class MovieListComponent implements OnInit {
       dates.push(end.subtract(1, 'd').format(DateFormat));
     }
     return dates;
+  }
+
+  toggleGridColumns() {
+    this.gridColumns = this.gridColumns === 3 ? 4 : 3;
   }
 }
