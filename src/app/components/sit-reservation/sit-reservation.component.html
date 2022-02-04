@@ -22,7 +22,7 @@
                             <div class="d-flex flex-row cinema-seats" *ngFor="let row of lay.Rows; let i = index">
                                 <div class="col p-2 flex-column" *ngFor="let col of row.columns; let j = index">
                                     <div class="card" [ngClass]="{'no-seat': col.isUnavailable}">
-                                        <button id="rowCol" class="btn btn-sm seatsBtn seat direction"
+                                        <button id="rowCol" class="btn btn-sm seatsBtn seat"
                                             [ngClass]="{'selected': col.isSelected}" type="button"
                                             (click)="selectSeat(col)" [disabled]="col.isReserved">
                                             {{col.seatId}}
@@ -35,7 +35,7 @@
                         <div class="custom-button">
                             <button type="button" id="ConfirmSeat" class="btn btn-warning"
                                 (click)="confirmSeat(); clicked = true;" [disabled]="clicked"
-                                routerLink="/sit-reservation-detail">
+                                [routerLink]="['/sit-reservation-detail']">
                                 <span class="fa fa-save"></span>&nbsp;
                                 <span>Confirm Seats</span>
                             </button>&nbsp;

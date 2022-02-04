@@ -24,6 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrCodeGenerateComponent } from './components/qr-code-generate/qr-code-generate.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,9 +40,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     PersonalInformationComponent,
     PaymentComponent,
     SitReservationDetailComponent,
+    QrCodeGenerateComponent,
   ],
   imports: [
     BrowserModule,
+    QRCodeModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

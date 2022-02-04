@@ -33,7 +33,6 @@ export class SitReservationComponent implements OnInit {
   moviePrice = 160;
   seatData: any = {};
   clicked = false;
-
   constructor(
     private _sitReservationService: SitReservationService,
     private _route: ActivatedRoute,
@@ -51,13 +50,25 @@ export class SitReservationComponent implements OnInit {
   }
 
   structureForm() {
-    let row = 10;
-    let column = 8;
+    const params = {
+      cinemaId: '1',
+      layoutId: '1',
+    };
+    this._sitReservationService.getSeats(params).subscribe((data) => {
+      console.log('DATA From Server', data);
+    });
+    let rowC = this.lay.LayoutRow as number;
+    let colC = this.lay.LayoutCol as number;
+    console.log('Cinema: ', this.movie.cinemaId);
+    console.log('Row: ', rowC);
+    console.log('Col: ', colC);
+    // let row = 10;
+    // let column = 8;
     this.lay.Rows = [];
-    for (let r = 1; r <= row; r++) {
+    for (let r = 1; r <= rowC; r++) {
       let newRow = new RowModel();
       newRow.columns = [];
-      for (let c = 1; c <= column; c++) {
+      for (let c = 1; c <= colC; c++) {
         let newCol = new ColumnModel();
         newCol.seatId = `${r.toString()}.${c.toString()}`;
         newRow.columns.push(newCol);
@@ -90,6 +101,7 @@ export class SitReservationComponent implements OnInit {
       const index = seat.indexOf('.');
       temps2.push(parseInt(seat.substring(0, index)));
     });
+
     for (const row in temps2) {
       let d = this.lay.Rows[temps2[row] - 1];
       d.columns.forEach((col) => {
@@ -115,9 +127,9 @@ export class SitReservationComponent implements OnInit {
   }
 
   loadSeats() {
-    this._sitReservationService.getSeats().subscribe((result) => {
-      this.layouts = result;
-    });
+    // this._sitReservationService.getSeats().subscribe((result) => {
+    //   this.layouts = result;
+    // });
   }
 
   getMovie() {

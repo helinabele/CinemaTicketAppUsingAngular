@@ -18,14 +18,14 @@
   margin-top: 2%;
 }
 
-.direction {
-  text-align: center;
-}
-
 .seatsBtn {
   margin-top: 1%;
   display: flex;
   text-align: center;
+  border: 1px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  width: 60px;
 
   .seat {
     cursor: pointer;
@@ -36,7 +36,10 @@
     color: #fff;
   }
 }
-
+.card {
+  border: none;
+  align-items: center;
+}
 .input {
   width: 14%;
   position: relative;

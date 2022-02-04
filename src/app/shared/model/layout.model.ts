@@ -32,6 +32,6 @@ export class ColumnModel {
   public isSelected?: boolean;
   public isUnavailable?: boolean;
   public isReserved?: boolean;
-  public Row?: number;
+  public LayoutRow?: number;
   public LayoutCol?: number;
 }
