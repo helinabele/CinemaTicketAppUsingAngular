@@ -10,6 +10,8 @@ import {
   RowModel,
 } from 'src/app/shared/model/layout.model';
 import { ICinema } from 'src/app/shared/model/cinema.model';
+import { ReservationQueryModel } from 'src/app/shared/model/reservationQuery.model';
+import { ReservationListModel } from 'src/app/shared/model/reservationList.model';
 
 @Component({
   selector: 'app-sit-reservation',
@@ -49,19 +51,9 @@ export class SitReservationComponent implements OnInit {
     this.loadSeats();
   }
 
-  structureForm() {
-    const params = {
-      cinemaId: '1',
-      layoutId: '1',
-    };
-    this._sitReservationService.getSeats(params).subscribe((data) => {
-      console.log('DATA From Server', data);
-    });
+  mapReservationToLayout(reservation: ReservationListModel) {
     let rowC = this.lay.LayoutRow as number;
     let colC = this.lay.LayoutCol as number;
-    console.log('Cinema: ', this.movie.cinemaId);
-    console.log('Row: ', rowC);
-    console.log('Col: ', colC);
     // let row = 10;
     // let column = 8;
     this.lay.Rows = [];
@@ -77,8 +69,8 @@ export class SitReservationComponent implements OnInit {
     }
 
     const temp = {
-      seats: ['1.4', '6.3', '7.3', '8.3', '9.3', '10.3', '2.6'],
-      seats2: ['10.4', '5.4', '6.4', '1.1', '2.3', '3.3', '3.1'],
+      seats: [reservation.Empty_Chair],
+      seats2: [reservation.Reserved_Seats],
     };
 
     let tempRows: any[] = [];
@@ -105,12 +97,28 @@ export class SitReservationComponent implements OnInit {
     for (const row in temps2) {
       let d = this.lay.Rows[temps2[row] - 1];
       d.columns.forEach((col) => {
-        if (temp.seats2.includes(col.seatId)) {
+        if (temp.seats2[0].split(',').includes(col.seatId)) {
           col.isReserved = true;
         }
         console.log('isReserved :', col.isReserved, col.seatId);
       });
     }
+  }
+
+  structureForm() {
+    const params: ReservationQueryModel = {
+      Movie_ID: this.id,
+      Cinema_ID: 1,
+      Schedule_Date: new Date('12-28-2021'),
+      Schedule_ID: 1,
+      Schedule_Time: 4,
+    };
+    this._sitReservationService.getSeats(params).subscribe((data) => {
+      console.log('DATA From Server', data);
+      this.lay.LayoutCol = data[0].LayoutCol;
+      this.lay.LayoutRow = data[0].LayoutRow;
+      this.mapReservationToLayout(data ? data[0] : new ReservationListModel());
+    });
   }
 
   selectSeat(col: ColumnModel) {

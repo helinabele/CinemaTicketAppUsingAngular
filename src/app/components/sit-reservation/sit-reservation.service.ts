@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ColumnModel, ILayout } from 'src/app/shared/model/layout.model';
 import { IMovie } from 'src/app/shared/model/movie.model';
+import { ReservationListModel } from 'src/app/shared/model/reservationList.model';
+import { ReservationQueryModel } from 'src/app/shared/model/reservationQuery.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,12 +27,16 @@ export class SitReservationService {
     localStorage.setItem('Seats', JSON.stringify(seats));
   }
 
-  getSeats(query: any): Observable<ILayout[]> {
+  getSeats(query: ReservationQueryModel): Observable<ReservationListModel[]> {
     let params = new HttpParams();
-    params.append('cinemaId', query.cinemaId);
-    return this.http.get<ILayout[]>(`${this.apiURL}/GetEmptyAndReserved`, {
-      params,
-    });
+
+    return this.http.post<ReservationListModel[]>(
+      `${this.apiURL}/GetEmptyAndReserved`,
+      query,
+      {
+        params,
+      }
+    );
   }
 
   get(id: string) {
