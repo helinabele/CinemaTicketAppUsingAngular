@@ -4,7 +4,7 @@ import { IMovie } from './movie.model';
 
 export interface ICinema {
   Cinema_ID?: number;
-  CinemaName?: String;
+  CinimaName?: String;
   Capacity?: number;
   LayoutID?: number;
   layouts?: ILayout[];
@@ -15,7 +15,7 @@ export interface ICinema {
 export class Cinema implements ICinema {
   constructor(
     public Cinema_ID?: number,
-    public CinemaName?: String,
+    public CinimaName?: String,
     public Capacity?: number,
     public LayoutId?: number,
     public layouts?: ILayout[],

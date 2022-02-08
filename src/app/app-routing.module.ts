@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'movie-list', pathMatch: 'full' },
   { path: 'movie-list', component: MovieListComponent },
   {
-    path: 'sit-reservation/:Movie_ID',
+    path: 'sit-reservation/:id',
     component: SitReservationComponent,
   },
   { path: 'sit-reservation-detail', component: SitReservationDetailComponent },

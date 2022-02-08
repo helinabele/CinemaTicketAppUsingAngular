@@ -78,7 +78,9 @@ p {
   text-align: center;
   padding: 12px;
 }
-
+.mat-card-title-group {
+  flex-direction: column-reverse;
+}
 mat-toolbar {
   justify-content: space-between;
 }

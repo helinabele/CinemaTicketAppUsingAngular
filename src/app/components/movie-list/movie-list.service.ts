@@ -15,10 +15,8 @@ export class MovieListService {
     return this.http.get<IMovie[]>(`${this.apiURL}/GetAllMovie`);
   }
 
-  public getMovie(id: number) {
-    //const movie: IMovie[]=this.getMovies();
-    // return movie.find(m => m.Movie_ID===id);
-    return this.http.get(`${this.apiURL}/GetMovieDetail/${id}`);
+  public getMovie(Movie_ID: number) {
+    return this.http.get(`${this.apiURL}/GetMovieDetail/${Movie_ID}`);
   }
 
   updateSit(Movie_ID: number): Observable<IMovie[]> {

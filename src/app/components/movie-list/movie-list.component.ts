@@ -71,6 +71,9 @@ export class MovieListComponent implements OnInit {
     this.videoPlayer.nativeElement.play();
   }
 
+  onReserve(movie: any) {
+    this._router.navigate(['/sit-reservation', movie.Schedule_ID]);
+  }
   // toggleVideo(): void {
   //   this.videoClicked = true;
   //   console.log('im Play!');

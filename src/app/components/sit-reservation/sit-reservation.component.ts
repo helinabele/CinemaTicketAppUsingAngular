@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IMovie, Movie } from 'src/app/shared/model/movie.model';
-import { SitReservationService } from './sit-reservation.service';
-import { MovieListService } from '../movie-list/movie-list.service';
+import { ICinema } from 'src/app/shared/model/cinema.model';
 import {
   ColumnModel,
   ILayout,
   Layout,
   RowModel,
 } from 'src/app/shared/model/layout.model';
-import { ICinema } from 'src/app/shared/model/cinema.model';
-import { ReservationQueryModel } from 'src/app/shared/model/reservationQuery.model';
+import { IMovie, Movie } from 'src/app/shared/model/movie.model';
 import { ReservationListModel } from 'src/app/shared/model/reservationList.model';
+import { ReservationQueryModel } from 'src/app/shared/model/reservationQuery.model';
+import { MovieListService } from '../movie-list/movie-list.service';
+import { SitReservationService } from './sit-reservation.service';
 
 @Component({
   selector: 'app-sit-reservation',
@@ -21,6 +21,7 @@ import { ReservationListModel } from 'src/app/shared/model/reservationList.model
 export class SitReservationComponent implements OnInit {
   layouts: ILayout[] = [];
   movie: IMovie = new Movie();
+  movies: IMovie[] = [];
   readOnly = false;
   isSaving: boolean;
   Movie_ID: string | null;
@@ -32,7 +33,6 @@ export class SitReservationComponent implements OnInit {
   isEmpty: boolean = false;
   bookings = [];
   selectedSeats: ColumnModel[] = [];
-  moviePrice = 160;
   seatData: any = {};
   clicked = false;
   constructor(
@@ -42,20 +42,15 @@ export class SitReservationComponent implements OnInit {
     private _movieListService: MovieListService
   ) {}
 
-  ngOnChanges() {}
-
   ngOnInit(): void {
-    this.id = this._route.snapshot.paramMap.get('Movie_ID');
+    this.id = this._route.snapshot.paramMap.get('id');
     this.getMovie();
     this.structureForm();
-    this.loadSeats();
   }
 
   mapReservationToLayout(reservation: ReservationListModel) {
     let rowC = this.lay.LayoutRow as number;
     let colC = this.lay.LayoutCol as number;
-    // let row = 10;
-    // let column = 8;
     this.lay.Rows = [];
     for (let r = 1; r <= rowC; r++) {
       let newRow = new RowModel();
@@ -110,7 +105,7 @@ export class SitReservationComponent implements OnInit {
       Movie_ID: this.id,
       Cinema_ID: 1,
       Schedule_Date: new Date('12-28-2021'),
-      Schedule_ID: 1,
+      Schedule_ID: this.id,
       Schedule_Time: 4,
     };
     this._sitReservationService.getSeats(params).subscribe((data) => {
@@ -128,16 +123,11 @@ export class SitReservationComponent implements OnInit {
     col.isSelected = !col.isSelected;
     if (col.isSelected) {
       this.selectedSeats.push(col);
-    } else {
-      index && this.selectedSeats.splice(index, 1);
+    }
+    if (index >= 0) {
+      this.selectedSeats.splice(index, 1);
     }
     console.log(col.isSelected, col.seatId);
-  }
-
-  loadSeats() {
-    // this._sitReservationService.getSeats().subscribe((result) => {
-    //   this.layouts = result;
-    // });
   }
 
   getMovie() {

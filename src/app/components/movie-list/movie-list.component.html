@@ -5,25 +5,22 @@
 </div>
 <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of movies">
+        <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="25%" *ngFor="let movie of movies">
             <mat-card class="mat-elevation-z4">
                 <mat-card-header>
                     <mat-card-title style="vertical-align: -webkit-baseline-middle;">{{"Title : "+ movie.Movie_Title}}
+                        <mat-card-subtitle>{{"Cinema : " + movie.CinimaName}}</mat-card-subtitle>
                     </mat-card-title>
                 </mat-card-header>
                 <img mat-card-image class="card-img-top" src="{{movie.Movie_Poster}}">
-
                 <mat-card-title-group>
-                    <!-- <div *ngFor="let cinema of cinemas" readonly="true">{{cinema.CinemaName}}</div> -->
                     <div>{{"Actors : " + movie.Movie_Actor}}</div>
                     <div>{{"Director :" + movie.Movie_Director}}</div>
+                    <div>{{"Time :" + movie.Schedule_Time}}</div>
+                    <mat-card-content>
+                        <p>{{movie.Movie_Discription}}</p>
+                    </mat-card-content>
                 </mat-card-title-group>
-
-                <mat-card-content>
-                    <p>{{movie.Movie_Discription}}</p>
-                </mat-card-content>
-
-                <!-- //justify-content: end; -->
 
                 <mat-card-actions>
                     <div class="custom-button">
@@ -31,9 +28,7 @@
                             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Watch thrailer<i
                                 class="fa fa-play-circle" aria-hidden="true">
                                 &nbsp;</i></a>
-
-                        <a mat-raised-button class="btn btn-sm btn-outline-dark"
-                            [routerLink]=" ['/sit-reservation/', movie.Movie_ID]">Reserve
+                        <a mat-raised-button class="btn btn-sm btn-outline-dark" (click)="onReserve(movie)">Reserve
                             <i class="fa fa-long-arrow-right">
                                 &nbsp;</i>
                         </a>

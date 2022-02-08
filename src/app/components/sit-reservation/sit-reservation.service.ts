@@ -58,7 +58,9 @@ export class SitReservationService {
     }
     return result;
   }
-
+  public getMovie(id: number) {
+    return this.http.get(`${this.apiURL}/GetMovieDetail/${id}`);
+  }
   remove(id: number) {
     return this.http.delete(
       `${this.apiURL}/GetEmptyAndReserved/${id.toString()}`
