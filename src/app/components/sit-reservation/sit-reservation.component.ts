@@ -64,11 +64,12 @@ export class SitReservationComponent implements OnInit {
     }
 
     const temp = {
-      seats: [reservation.Empty_Chair],
-      seats2: [reservation.Reserved_Seats],
+      seats: [] as string[],
+      seats2: [] as string[],
     };
 
     let tempRows: any[] = [];
+    temp.seats = reservation.Empty_Chair.split(',');
     temp.seats.forEach((seat) => {
       const index = seat.indexOf('.');
       tempRows.push(parseInt(seat.substring(0, index)));
@@ -84,18 +85,19 @@ export class SitReservationComponent implements OnInit {
     }
 
     let temps2: any[] = [];
+    temp.seats2 = reservation.Reserved_Seats.split(',');
     temp.seats2.forEach((seat) => {
       const index = seat.indexOf('.');
       temps2.push(parseInt(seat.substring(0, index)));
     });
+    console.log('Reserved: ', temps2);
 
     for (const row in temps2) {
       let d = this.lay.Rows[temps2[row] - 1];
       d.columns.forEach((col) => {
-        if (temp.seats2[0].split(',').includes(col.seatId)) {
+        if (temp.seats2.includes(col.seatId)) {
           col.isReserved = true;
         }
-        console.log('isReserved :', col.isReserved, col.seatId);
       });
     }
   }

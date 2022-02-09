@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2">
-                    <mat-card class="movie-detail">
+                    <mat-card fxLayout="row wrap" class="movie-detail">
                         <mat-card-title-group>
                             <mat-card-title>{{"Title :" + movie.Movie_Title}}</mat-card-title>
                             <mat-card-subtitle>{{movie.Movie_Director}}</mat-card-subtitle>
@@ -18,21 +18,23 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12 text-center">
-                            <mat-card>
+                            <mat-card class="header">
                                 <h1>{{movie.CinimaName + " : MOVIE SEAT RESERVATION"}}</h1>
                             </mat-card>
-                            <div class="d-flex flex-row cinema-seats" *ngFor="let row of lay.Rows; let i = index">
-                                <!-- make column flexible -->
-                                <div class="col-md p-2 flex-column" *ngFor="let col of row.columns; let j = index">
-                                    <div class="card" [ngClass]="{'no-seat': col.isUnavailable}">
-                                        <button id="rowCol" class="btn btn-sm seatsBtn seat"
-                                            [ngClass]="{'selected': col.isSelected}" type="button"
-                                            (click)="selectSeat(col)" [disabled]="col.isReserved">
-                                            {{col.seatId}}
-                                        </button>
+                            <mat-card fxLayout="row wrap" class="med">
+                                <div class="d-flex flex-row cinema-seats" *ngFor="let row of lay.Rows; let i = index">
+                                    <!-- make column flexible -->
+                                    <div class="col-md p-2 flex-column" *ngFor="let col of row.columns; let j = index">
+                                        <div class="card" [ngClass]="{'no-seat': col.isUnavailable}">
+                                            <button id="rowCol" class="btn btn-sm seatsBtn seat"
+                                                [ngClass]="{'selected': col.isSelected}" type="button"
+                                                (click)="selectSeat(col)" [disabled]="col.isReserved">
+                                                {{col.seatId}}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </mat-card>
                         </div>
                     </div>
                     <div class="row">

@@ -1,5 +1,5 @@
 .search {
-  position: absolute;
+  position: static;
   left: 83%;
   top: 14%;
   width: 30%;
@@ -53,4 +53,7 @@ a:active {
   line-height: 30px;
   margin: 0;
   width: 85%;
+}
+.form-control {
+  border-radius: 0;
 }

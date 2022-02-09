@@ -44,7 +44,7 @@ export class MovieListComponent implements OnInit {
   muted = false;
   cinemas: ICinema[];
   // gridColumns: any = new FormControl();
-  gridColumns: number = 3;
+  gridColumns: number = 4;
 
   @ViewChild('videoPlayer') videoPlayer: ElementRef;
 
