@@ -14,17 +14,37 @@ export class SitReservationService {
   private apiURL = environment.apiURL + '/CinimaTicket';
   public movies: IMovie[];
   public colModel: ColumnModel;
+  selectedSeats: ColumnModel[] = [];
+  // myIds: Array<any> = [];
+  // maxLen: number;
+
   constructor(private http: HttpClient) {}
 
+  // setSeats(Schedule_ID: any) {
+  //   this.selectedSeats = Schedule_ID;
+  //   // if (this.maxLen < this.selectedSeats.length) {
+  //   //   this.maxLen = this.selectedSeats.length;
+  //   // }
+  //   // console.log('Max :', this.maxLen);
+  // }
+
+  // retrieveIDs(Schedule_ID: any) {
+  //   return this.selectedSeats;
+  // }
+
+  getSelectedSeats() {
+    return JSON.parse(localStorage.getItem('Seats')!);
+  }
+
+  resetSelectedSeats() {
+    localStorage.removeItem('Seats');
+  }
+
   addSeat(seatData: any) {
-    let seats = [];
-    if (localStorage.getItem('Seats')) {
-      seats = JSON.parse(localStorage.getItem('Seats')!);
-      seats = [seatData, ...seats];
-    } else {
-      seats = [seatData];
+    this.resetSelectedSeats();
+    if (seatData) {
+      localStorage.setItem('Seats', JSON.stringify(seatData['0']));
     }
-    localStorage.setItem('Seats', JSON.stringify(seats));
   }
 
   getSeats(query: ReservationQueryModel): Observable<ReservationListModel[]> {

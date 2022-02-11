@@ -45,6 +45,9 @@ export class SitReservationComponent implements OnInit {
   ngOnInit(): void {
     this.id = this._route.snapshot.paramMap.get('id');
     this.getMovie();
+    this.selectedSeats = this._sitReservationService.getSelectedSeats()
+      ? this._sitReservationService.getSelectedSeats()
+      : [];
     this.structureForm();
   }
 
@@ -129,7 +132,12 @@ export class SitReservationComponent implements OnInit {
     if (index >= 0) {
       this.selectedSeats.splice(index, 1);
     }
-    console.log(col.isSelected, col.seatId);
+    console.log(
+      'Result :',
+      col.isSelected,
+      col.seatId,
+      this.selectedSeats.length
+    );
   }
 
   getMovie() {
@@ -142,7 +150,12 @@ export class SitReservationComponent implements OnInit {
     window.history.back();
   }
 
-  confirmSeat() {
+  confirmSeat(movie: any) {
+    this._router.navigate([
+      '/sit-reservation-detail',
+      movie.Schedule_ID,
+      this.selectedSeats,
+    ]);
     this.seatData = Object.assign(this.seatData, [
       this.selectedSeats,
       this.movie,

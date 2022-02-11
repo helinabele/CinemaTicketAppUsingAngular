@@ -4,14 +4,41 @@
             <div class="card">
                 <mat-card-title>Movie Detail</mat-card-title>
             </div>
+            <div style="vertical-align: -webkit-baseline-middle;">{{"Title : "+ movie.Movie_Title}}
+                <mat-card-subtitle>{{"Cinema : " + movie.CinimaName}}</mat-card-subtitle>
+            </div>
+            <div>{{"Actors : " + movie.Movie_Actor}}</div>
+            <div>{{"Director :" + movie.Movie_Director}}</div>
+            <div>{{"Date :" + movie.Schedule_Date}}</div>
+            <div>{{"Time :" + movie.Schedule_Time}}</div>
+            <mat-card-content>
+                <p>{{movie.Movie_Discription}}</p>
+            </mat-card-content>
+            <div>{{"No of Seats :" + selectedSeats.length}}</div>
+            <div>{{"Amt :" + movie.Movie_Amount}}</div>
+            <div>Total Amount : {{(selectedSeats.length * movie.Movie_Amount!) |number}}
+                Br
+            </div>
         </mat-card>
+
+
         <mat-card class="col-sm-6">
             <div class="card">
                 <span>Personal Info</span>
             </div>
+
         </mat-card>
     </div>
     <div class="row">
-        <button type="button" routerLink="/qr-code-generate">Submit</button>
+        <div class="custom-button">
+            <button type="button" class="btn btn-warning" (click)="onSave()">
+                <span class="fa fa-save"></span>&nbsp;
+                <span>Confirm</span>
+            </button>&nbsp;
+            <button type="submit" class="btn btn-info" (click)="previousState()">
+                <span class="fa fa-arrow-left"></span>&nbsp;
+                <span>Back</span>
+            </button>
+        </div>
     </div>
 </div>

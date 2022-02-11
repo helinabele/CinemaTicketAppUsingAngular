@@ -41,8 +41,7 @@
                         <div *ngFor="let cin of cinemas">{{cin.Row}}</div>
                         <div class="custom-button">
                             <button type="button" id="ConfirmSeat" class="btn btn-warning"
-                                (click)="confirmSeat(); clicked = true;" [disabled]="clicked"
-                                [routerLink]="['/sit-reservation-detail']">
+                                (click)="confirmSeat(movie); clicked = true;" [disabled]="clicked">
                                 <span class="fa fa-save"></span>&nbsp;
                                 <span>Confirm Seats</span>
                             </button>&nbsp;

@@ -26,6 +26,7 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrCodeGenerateComponent } from './components/qr-code-generate/qr-code-generate.component';
+import { SitReservationService } from './components/sit-reservation/sit-reservation.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { QrCodeGenerateComponent } from './components/qr-code-generate/qr-code-g
     DatePipe,
     MovieListComponent,
     SitReservationComponent,
+    SitReservationService,
     MovieListService,
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
