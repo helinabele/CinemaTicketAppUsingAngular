@@ -6,7 +6,7 @@
        [errorCorrectionLevel]="correctionLevel"
        [value]="value"
        cssClass="coolQRCode"></ngx-qrcode> -->
-    <qrcode cssClass="coolQRCode" #qrcode [qrdata]="qrInfo" [width]="256" elementType="img"
+    <qrcode *ngIf="qrInfo" cssClass="coolQRCode" #qrcode [qrdata]="qrInfo" [width]="256" elementType="img"
         [errorCorrectionLevel]="'M'"></qrcode>
     <a [href]="link" download><button class="btn btn-block" (click)="downloadQRCode()">Download QRCode</button></a>
 </div>

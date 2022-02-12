@@ -25,12 +25,14 @@
                                 <div class="d-flex flex-row cinema-seats" *ngFor="let row of lay.Rows; let i = index">
                                     <!-- make column flexible -->
                                     <div class="col-md p-2 flex-column" *ngFor="let col of row.columns; let j = index">
-                                        <div class="card" [ngClass]="{'no-seat': col.isUnavailable}">
+                                        <div class="card" [ngClass]="{'no-seat': col.isUnavailable}"
+                                            matTooltip="This sit is reserved" [matTooltipDisabled]="!col.isReserved">
                                             <button id="rowCol" class="btn btn-sm seatsBtn seat"
                                                 [ngClass]="{'selected': col.isSelected}" type="button"
                                                 (click)="selectSeat(col)" [disabled]="col.isReserved">
                                                 {{col.seatId}}
                                             </button>
+                                            <!-- <div *ngIf="col.isReserved" class="tooltip">I am a tooltip!</div> -->
                                         </div>
                                     </div>
                                 </div>

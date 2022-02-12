@@ -51,7 +51,7 @@ export class SitReservationComponent implements OnInit {
     this.structureForm();
   }
 
-  mapReservationToLayout(reservation: ReservationListModel) {
+  mapReservationToLayout(reservations: ReservationListModel[]) {
     let rowC = this.lay.LayoutRow as number;
     let colC = this.lay.LayoutCol as number;
     this.lay.Rows = [];
@@ -72,7 +72,7 @@ export class SitReservationComponent implements OnInit {
     };
 
     let tempRows: any[] = [];
-    temp.seats = reservation.Empty_Chair.split(',');
+    temp.seats = reservations[0].Empty_Chair.split(',');
     temp.seats.forEach((seat) => {
       const index = seat.indexOf('.');
       tempRows.push(parseInt(seat.substring(0, index)));
@@ -88,7 +88,10 @@ export class SitReservationComponent implements OnInit {
     }
 
     let temps2: any[] = [];
-    temp.seats2 = reservation.Reserved_Seats.split(',');
+    temp.seats2 = reservations
+      .map((t) => t.Reserved_Seats)
+      .join(',')
+      .split(',');
     temp.seats2.forEach((seat) => {
       const index = seat.indexOf('.');
       temps2.push(parseInt(seat.substring(0, index)));
@@ -115,13 +118,15 @@ export class SitReservationComponent implements OnInit {
     };
     this._sitReservationService.getSeats(params).subscribe((data) => {
       console.log('DATA From Server', data);
+      this.lay.Layout_ID = data[0].Layout_ID;
       this.lay.LayoutCol = data[0].LayoutCol;
       this.lay.LayoutRow = data[0].LayoutRow;
-      this.mapReservationToLayout(data ? data[0] : new ReservationListModel());
+      this.mapReservationToLayout(data ? data : []);
     });
   }
 
   selectSeat(col: ColumnModel) {
+    console.log('Selected Seatss: ', this.selectedSeats);
     const index = this.selectedSeats.findIndex(
       (seat) => seat.seatId == col.seatId
     );
@@ -146,15 +151,11 @@ export class SitReservationComponent implements OnInit {
     });
   }
 
-  previousState() {
-    window.history.back();
-  }
-
   confirmSeat(movie: any) {
     this._router.navigate([
       '/sit-reservation-detail',
       movie.Schedule_ID,
-      this.selectedSeats,
+      this.lay.Layout_ID,
     ]);
     this.seatData = Object.assign(this.seatData, [
       this.selectedSeats,
@@ -163,16 +164,7 @@ export class SitReservationComponent implements OnInit {
     this._sitReservationService.addSeat(this.seatData);
   }
 
-  private onSaveSuccess(result: IMovie) {
-    this.isSaving = false;
-    this.previousState();
-  }
-
-  onSaveError() {
-    this.isSaving = false;
-  }
-
-  ngOnDestroy() {
-    //this.sub.unsubscribe();
+  previousState() {
+    window.history.back();
   }
 }

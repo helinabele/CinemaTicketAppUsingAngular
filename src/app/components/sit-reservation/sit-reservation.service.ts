@@ -15,6 +15,7 @@ export class SitReservationService {
   public movies: IMovie[];
   public colModel: ColumnModel;
   selectedSeats: ColumnModel[] = [];
+  private seatsForApi = 'SEATS_FOR_API';
   // myIds: Array<any> = [];
   // maxLen: number;
 
@@ -38,13 +39,26 @@ export class SitReservationService {
 
   resetSelectedSeats() {
     localStorage.removeItem('Seats');
+    localStorage.removeItem('SEATS_FOR_API');
   }
 
   addSeat(seatData: any) {
     this.resetSelectedSeats();
     if (seatData) {
       localStorage.setItem('Seats', JSON.stringify(seatData['0']));
+      localStorage.setItem(
+        'SEATS_FOR_API',
+        seatData['0'].map((t: any) => t.seatId).join(',')
+      );
     }
+  }
+
+  saveSeatForApi(seats: string) {
+    localStorage.setItem(this.seatsForApi, seats);
+  }
+
+  getSeatsForApi() {
+    return localStorage.getItem(this.seatsForApi);
   }
 
   getSeats(query: ReservationQueryModel): Observable<ReservationListModel[]> {

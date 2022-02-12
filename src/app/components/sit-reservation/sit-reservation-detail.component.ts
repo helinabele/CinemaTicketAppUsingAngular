@@ -16,6 +16,8 @@ export class SitReservationDetailComponent implements OnInit {
   movie: IMovie = new Movie();
   id: any;
   selectedSeats: ColumnModel[] = [];
+  seatData: any = {};
+  layoutId: string;
 
   constructor(
     private _movieListService: MovieListService,
@@ -26,7 +28,8 @@ export class SitReservationDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSeats();
-    this.id = this._route.snapshot.paramMap.get('id');
+    this.id = this._route.snapshot.paramMap.get('scheduleId');
+    this.layoutId = this._route.snapshot.params['layoutId'];
     this.getMovie();
   }
 
@@ -43,8 +46,27 @@ export class SitReservationDetailComponent implements OnInit {
     });
   }
 
-  onSave() {
-    this._router.navigate(['/qr-code-generate']);
+  onSave(movie: any) {
+    let seats = ``;
+    this.selectedSeats.forEach((seat) => {
+      seats += `${seat.seatId.toString()} `;
+    });
+    seats = seats
+      .split(' ')
+      .join(',')
+      .substring(0, seats.length - 1);
+
+    this._router.navigate([
+      '/qr-code-generate',
+      movie.Schedule_ID,
+      this.layoutId,
+    ]);
+    this._sitReservationService.saveSeatForApi(seats);
+    this.seatData = Object.assign(this.seatData, [
+      this.selectedSeats,
+      this.movie,
+    ]);
+    this._sitReservationService.addSeat(this.seatData);
   }
 
   previousState() {

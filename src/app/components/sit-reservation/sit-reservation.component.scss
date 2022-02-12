@@ -32,14 +32,32 @@
   }
 
   &.selected {
-    background-color: rgb(255, 0, 0, 1);
+    background-color: green;
+    color: #fff;
+  }
+  &.selected::after {
+    background-color: green;
     color: #fff;
   }
 }
+.isSelected {
+  a:visited {
+    color: purple;
+  }
+  a:active {
+    color: red;
+  }
+}
+button[disabled] {
+  background-color: rgb(255, 0, 0, 1);
+  color: #fff;
+}
+
 .card {
   border: none;
   align-items: center;
 }
+
 .input {
   width: 14%;
   position: relative;
@@ -176,3 +194,10 @@ $grid-gutter-width: 1.5rem !default;
     display: none;
   }
 }
+// #rowCol,
+// #rowCol:hover,
+// #rowCol:active,
+// #rowCol:focus {
+//   color: blue;
+//   // more css
+// }

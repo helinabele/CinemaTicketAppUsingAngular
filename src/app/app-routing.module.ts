@@ -15,10 +15,13 @@ const routes: Routes = [
     component: SitReservationComponent,
   },
   {
-    path: 'sit-reservation-detail/:id',
+    path: 'sit-reservation-detail/:scheduleId/:layoutId',
     component: SitReservationDetailComponent,
   },
-  { path: 'qr-code-generate', component: QrCodeGenerateComponent },
+  {
+    path: 'qr-code-generate/:scheduleId/:layoutId',
+    component: QrCodeGenerateComponent,
+  },
   { path: 'about', component: AboutComponent },
   { path: 'home', component: HomeComponent },
   { path: '**', component: HomeComponent },
