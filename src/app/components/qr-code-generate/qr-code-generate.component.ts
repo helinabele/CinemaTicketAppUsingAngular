@@ -47,7 +47,6 @@ export class QrCodeGenerateComponent implements OnInit {
     layoutData.TikSch_ID = this.scheduleId;
     this._qrCodeGenerateService.getlayout(layoutData).subscribe((data) => {
       this.qrInfo = data;
-      debugger;
       this.movies = data;
       this._sitReservationService.resetSelectedSeats();
     });

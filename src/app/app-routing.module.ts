@@ -6,6 +6,7 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
 import { QrCodeGenerateComponent } from './components/qr-code-generate/qr-code-generate.component';
 import { SitReservationDetailComponent } from './components/sit-reservation/sit-reservation-detail.component';
 import { SitReservationComponent } from './components/sit-reservation/sit-reservation.component';
+import { ErrorComponent } from './layout/error/error.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'movie-list', pathMatch: 'full' },
@@ -24,7 +25,7 @@ const routes: Routes = [
   },
   { path: 'about', component: AboutComponent },
   { path: 'home', component: HomeComponent },
-  { path: '**', component: HomeComponent },
+  { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({

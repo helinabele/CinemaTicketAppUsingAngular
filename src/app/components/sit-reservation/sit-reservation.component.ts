@@ -96,7 +96,6 @@ export class SitReservationComponent implements OnInit {
       const index = seat.indexOf('.');
       temps2.push(parseInt(seat.substring(0, index)));
     });
-    console.log('Reserved: ', temps2);
 
     for (const row in temps2) {
       let d = this.lay.Rows[temps2[row] - 1];
@@ -126,7 +125,6 @@ export class SitReservationComponent implements OnInit {
   }
 
   selectSeat(col: ColumnModel) {
-    console.log('Selected Seatss: ', this.selectedSeats);
     const index = this.selectedSeats.findIndex(
       (seat) => seat.seatId == col.seatId
     );

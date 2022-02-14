@@ -76,7 +76,6 @@ export class MovieListComponent implements OnInit {
   }
   // toggleVideo(): void {
   //   this.videoClicked = true;
-  //   console.log('im Play!');
   //   this.videoplayer.nativeElement.play();
   //   // this.videoPlayer.nativeElement.paused
   //   //   ? this.videoPlayer.nativeElement.play()
