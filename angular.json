@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+          "allowedCommonJsDependencies": ["@cordobo/qrcode"],
             "outputPath": "dist/cinema-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,14 +37,15 @@
               "src/styles.scss"
             ],
             "scripts": []
+            
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

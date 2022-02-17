@@ -65,18 +65,6 @@ button[disabled] {
   margin-right: 2%;
 }
 
-.greenColor {
-  background-color: #5cb85c;
-}
-
-.redColor {
-  background-color: #d9534f;
-}
-
-.resultTable td:nth-child(3) {
-  max-width: 100%;
-  word-break: break-all;
-}
 p {
   font-family: Lato;
 }
@@ -97,19 +85,14 @@ p {
 .cards {
   width: 400px;
 }
+
 mat-card img {
   object-fit: cover; /*this makes the image in src fit to the size specified below*/
   width: 200; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
   height: 200%;
   margin-right: inherit;
 }
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 0;
-  height: 0;
-  overflow: hidden;
-}
+
 .button {
   padding: 20px 40px;
   border-color: white;
@@ -153,17 +136,6 @@ $grid-gutter-width: 1.5rem !default;
   transform: translate(-50%, -50%);
 }
 
-.my-flex-container {
-  border: 2px solid green;
-  height: 100px;
-  margin-bottom: 20px;
-}
-.my-flex-container-column {
-  border: 2px solid green;
-  height: 200;
-  margin-bottom: 20px;
-}
-
 .no-seat {
   opacity: 0;
   cursor: none;
@@ -194,10 +166,3 @@ $grid-gutter-width: 1.5rem !default;
     display: none;
   }
 }
-// #rowCol,
-// #rowCol:hover,
-// #rowCol:active,
-// #rowCol:focus {
-//   color: blue;
-//   // more css
-// }
